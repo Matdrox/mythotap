@@ -721,8 +721,9 @@ GameObject:
   m_Component:
   - component: {fileID: 315370280}
   - component: {fileID: 315370279}
+  - component: {fileID: 315370281}
   m_Layer: 0
-  m_Name: Enemty
+  m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -795,6 +796,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &315370281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 315370278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a7503d2f1b384f45a251daaaeb7d59f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMoving: 0
+  originPos: {x: 0, y: 0, z: 0}
+  targetPos: {x: 0, y: 0, z: 0}
+  moveTime: 0.2
 --- !u!1 &357361621
 GameObject:
   m_ObjectHideFlags: 0
@@ -4381,6 +4398,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 952ac440d699b4376af3429dca676868, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemy: {fileID: 315370278}
 --- !u!1 &1546880946
 GameObject:
   m_ObjectHideFlags: 0

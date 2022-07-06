@@ -3,27 +3,51 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
+	public GameObject enemy;
+	private Enemy enemyScript;
     private bool isMoving;
     private Vector3 originPos, targetPos;
     private float moveTime = 0.2f;
 
-    void Update()
-    {
+		void Start() {
+				enemyScript = enemy.GetComponent<Enemy>();
+		}
+
+    void Update() {
+		if (Input.anyKeyDown) {
+			var randInt = Random.Range(1, 4);
+			switch (randInt) {
+				case 1:
+					StartCoroutine(enemyScript.Move(Vector2.up));
+					break;
+				case 2:
+					StartCoroutine(enemyScript.Move(Vector2.down));
+					break;
+				case 3:
+					StartCoroutine(enemyScript.Move(Vector2.left));
+					break;
+				case 4:
+					StartCoroutine(enemyScript.Move(Vector2.right));
+					break;
+				
+			}
+		}
+
         if (Input.GetKey(KeyCode.UpArrow) && !isMoving) {
-            StartCoroutine(MovePlayer(Vector2.up));
+            StartCoroutine(Move(Vector2.up));
         }
         if (Input.GetKey(KeyCode.DownArrow) && !isMoving) {
-            StartCoroutine(MovePlayer(Vector2.down));
+            StartCoroutine(Move(Vector2.down));
         }
         if (Input.GetKey(KeyCode.LeftArrow) && !isMoving) {
-            StartCoroutine(MovePlayer(Vector2.left));
+            StartCoroutine(Move(Vector2.left));
         }
         if (Input.GetKey(KeyCode.RightArrow) && !isMoving) {
-            StartCoroutine(MovePlayer(Vector2.right));
+            StartCoroutine(Move(Vector2.right));
         }
     }
 
-    private IEnumerator MovePlayer(Vector3 dir) {
+    private IEnumerator Move(Vector3 dir) {
         isMoving = true;
 
         float elapsedTime = 0;
