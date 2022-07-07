@@ -3,32 +3,37 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
-	private GameObject[] enemies;
-	private List<Enemy> enemyScripts = new List<Enemy>();
+    public LayerMask wall;
     private bool isMoving;
     private Vector3 originPos, targetPos;
     private float moveTime = 0.2f;
 
-		void Start() {
-            enemies = GameObject.FindGameObjectsWithTag("Enemy");
-            foreach (GameObject enemy in enemies) {
-                enemyScripts.Add(enemy.GetComponent<Enemy>());
+    private void Update() {
+        if (Input.GetKey(KeyCode.UpArrow) && !isMoving) {
+            if (!Physics2D.OverlapCircle(transform.position + new Vector3(0, 1, 0), 0.2f, wall)) {
+                StartCoroutine(Move(Vector2.up));
             }
-		}
-
-    void Update() {
-        if (Input.GetKey(KeyCode.UpArrow) && !isMoving && transform.position.y < 4) {
-            StartCoroutine(Move(Vector2.up));
         }
-        if (Input.GetKey(KeyCode.DownArrow) && !isMoving && transform.position.y > -3) {
-            StartCoroutine(Move(Vector2.down));
+        if (Input.GetKey(KeyCode.DownArrow) && !isMoving) {
+            if (!Physics2D.OverlapCircle(transform.position + new Vector3(0, -1, 0), 0.2f, wall)) {
+                StartCoroutine(Move(Vector2.down));
+            }
         }
         if (Input.GetKey(KeyCode.LeftArrow) && !isMoving && transform.position.x > -8) {
-            StartCoroutine(Move(Vector2.left));
+            if (!Physics2D.OverlapCircle(transform.position + new Vector3(-1, 0, 0), 0.2f, wall)) {
+                StartCoroutine(Move(Vector2.left));
+            }
         }
         if (Input.GetKey(KeyCode.RightArrow) && !isMoving) {
+            if (!Physics2D.OverlapCircle(transform.position + new Vector3(1, 0, 0), 0.2f, wall)) {
             StartCoroutine(Move(Vector2.right));
+            }
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        Debug.Log("Collision");
+        // Destroy(other.gameObject);
     }
 
     private IEnumerator Move(Vector3 dir) {
