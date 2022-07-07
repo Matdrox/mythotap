@@ -17,13 +17,13 @@ public class PlayerMovement : MonoBehaviour {
 		}
 
     void Update() {
-        if (Input.GetKey(KeyCode.UpArrow) && !isMoving) {
+        if (Input.GetKey(KeyCode.UpArrow) && !isMoving && transform.position.y < 4) {
             StartCoroutine(Move(Vector2.up));
         }
-        if (Input.GetKey(KeyCode.DownArrow) && !isMoving) {
+        if (Input.GetKey(KeyCode.DownArrow) && !isMoving && transform.position.y > -3) {
             StartCoroutine(Move(Vector2.down));
         }
-        if (Input.GetKey(KeyCode.LeftArrow) && !isMoving) {
+        if (Input.GetKey(KeyCode.LeftArrow) && !isMoving && transform.position.x > -8) {
             StartCoroutine(Move(Vector2.left));
         }
         if (Input.GetKey(KeyCode.RightArrow) && !isMoving) {

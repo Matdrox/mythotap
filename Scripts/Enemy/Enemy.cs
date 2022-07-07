@@ -12,10 +12,14 @@ public class Enemy : MonoBehaviour {
             var randInt = Random.Range(0, 4);
             switch (randInt) {
                 case 0:
-                    StartCoroutine(Move(Vector2.up));
+                    if (transform.position.y < 4) {
+                        StartCoroutine(Move(Vector2.up));
+                    }
                     break;
                 case 1:
-                    StartCoroutine(Move(Vector2.down));
+                    if (transform.position.y > -3) {
+                        StartCoroutine(Move(Vector2.down));
+                    }
                     break;
                 case 2: case 3:
                     StartCoroutine(Move(Vector2.left));
