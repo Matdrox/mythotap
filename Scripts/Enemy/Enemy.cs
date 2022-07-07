@@ -7,7 +7,28 @@ public class Enemy : MonoBehaviour {
     public Vector3 originPos, targetPos;
     public float moveTime = 0.2f;
 
-    public IEnumerator Move(Vector3 dir) {
+    void Update() {
+        if (Input.anyKey && !isMoving) {
+            var randInt = Random.Range(0, 4);
+            switch (randInt) {
+                case 0:
+                    StartCoroutine(Move(Vector2.up));
+                    break;
+                case 1:
+                    StartCoroutine(Move(Vector2.down));
+                    break;
+                case 2: case 3:
+                    StartCoroutine(Move(Vector2.left));
+                    break;
+                case 4:
+                    StartCoroutine(Move(Vector2.right));
+                    break;
+            }
+        }
+    }
+
+
+    private IEnumerator Move(Vector3 dir) {
         isMoving = true;
 
         float elapsedTime = 0;

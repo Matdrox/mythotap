@@ -3,36 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
-	public GameObject enemy;
-	private Enemy enemyScript;
+	private GameObject[] enemies;
+	private List<Enemy> enemyScripts = new List<Enemy>();
     private bool isMoving;
     private Vector3 originPos, targetPos;
     private float moveTime = 0.2f;
 
 		void Start() {
-				enemyScript = enemy.GetComponent<Enemy>();
+            enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            foreach (GameObject enemy in enemies) {
+                enemyScripts.Add(enemy.GetComponent<Enemy>());
+            }
 		}
 
     void Update() {
-		if (Input.anyKeyDown) {
-			var randInt = Random.Range(1, 4);
-			switch (randInt) {
-				case 1:
-					StartCoroutine(enemyScript.Move(Vector2.up));
-					break;
-				case 2:
-					StartCoroutine(enemyScript.Move(Vector2.down));
-					break;
-				case 3:
-					StartCoroutine(enemyScript.Move(Vector2.left));
-					break;
-				case 4:
-					StartCoroutine(enemyScript.Move(Vector2.right));
-					break;
-				
-			}
-		}
-
         if (Input.GetKey(KeyCode.UpArrow) && !isMoving) {
             StartCoroutine(Move(Vector2.up));
         }
