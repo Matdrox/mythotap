@@ -9,7 +9,7 @@ public class Enemy : MonoBehaviour {
     public float moveTime = 0.2f;
 
     void Update() {
-        if (Input.anyKey && !isMoving) {
+        if (Input.anyKey && !isMoving) { // Switch from any.key
             var randInt = Random.Range(0, 5);
             switch (randInt) {
                 case 0:
